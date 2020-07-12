@@ -33,6 +33,6 @@ jobs:
         PACKAGE_NAME: KataRomanConverter
         VERSION_REGEX: <Version>(.*)</Version>
         TAG_FORMAT: version*
-        NUGET_KEY: ${{oy2eqe7iocdi65dmrjvqz7sidtcwu55uvllgzgpo5r3mgi}}
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
         NUGET_SOURCE: https://api.nuget.org/v3/index.json
 
