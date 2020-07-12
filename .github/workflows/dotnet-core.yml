@@ -22,17 +22,11 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore /property:Version=${{ github.event.release.tag_name}}
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Pack Project
+      run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name}}
     - name: Publish NuGet
-      uses: brandedoutcast/publish-nuget@v2.5.3
-      id: publish_nuget
-      with:
-        PROJECT_FILE_PATH: RomanConverter/RomanConverter.csproj
-        PACKAGE_NAME: KataRomanConverter
-        VERSION_REGEX: <Version>(.*)</Version>
-        TAG_FORMAT: version*
-        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-        NUGET_SOURCE: https://api.nuget.org/v3/index.json
-
+      run: dotnet nuget push **/*.nupgkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+     
