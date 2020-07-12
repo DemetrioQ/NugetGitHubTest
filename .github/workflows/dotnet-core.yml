@@ -25,3 +25,13 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Publish NuGet
+      uses: brandedoutcast/publish-nuget@v2.5.3
+      id: publish_nuget
+      with:
+        PROJECT_FILE_PATH: RomanConverter/RomanConverter.csproj
+        PACKAGE_NAME: KataRomanConverter
+        TAG_FORMAT: version*
+        NUGET_KEY: ${oy2eqe7iocdi65dmrjvqz7sidtcwu55uvllgzgpo5r3mgi}
+        NUGET_SOURCE: https://api.nuget.org/v3/index.json
+
