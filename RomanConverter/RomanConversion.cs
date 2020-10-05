@@ -26,7 +26,6 @@ namespace RomanConverter
         {
             int arabSum = 0;
 
-
             for (int i = 0; i < romanValue.Length; i++)
             {
                 char currentLetter = romanChar[i];
